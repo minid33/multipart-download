@@ -15,7 +15,7 @@ export interface MultipartOperation {
 }
 
 export class MultipartDownload extends events.EventEmitter implements MultipartOperation {
-    private static readonly DEFAULT_NUMBER_OF_CONNECTIONS: number = 1;
+    private static readonly DEFAULT_NUMBER_OF_CONNECTIONS: number = 20; // Max default for windows
     private static readonly SINGLE_CONNECTION: number = 1;
 
     public start(url: string, startOptions?: StartOptions): MultipartDownload {
@@ -36,7 +36,7 @@ export class MultipartDownload extends events.EventEmitter implements MultipartO
         let directory: string;
         let file: string;
         let headers: Headers;
-        
+
         if (startOptions) {
             connections = startOptions.numOfConnections ?
                             startOptions.numOfConnections : connections;
